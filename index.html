@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="SciTune — Ultra-high vacuum consultancy, laser systems advisory, and quantum ecosystem engineering. Incorporated in India, serving globally."/>
+<title>SciTune — Engineering Tuned by Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #070b12;
+    --bg2: #0c1220;
+    --bg3: #111827;
+    --border: rgba(255,255,255,0.07);
+    --border-mid: rgba(255,255,255,0.14);
+    --text: #e8edf5;
+    --text-muted: #6b7a96;
+    --text-dim: #3d4d66;
+    --laser: #00c8ff;
+    --laser-dim: rgba(0,200,255,0.12);
+    --laser-glow: rgba(0,200,255,0.25);
+    --accent: #4af3c0;
+    --accent-dim: rgba(74,243,192,0.1);
+    --warn: #ff6b35;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 64px;
+    background: rgba(7,11,18,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--laser); }
+
+  nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  nav ul a {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--laser); }
+
+  .nav-cta {
+    font-size: 0.85rem;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--laser);
+    color: var(--laser) !important;
+    border-radius: 3px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .nav-cta:hover {
+    background: var(--laser);
+    color: var(--bg) !important;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    padding: 6rem 2.5rem 2rem;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .laser-line {
+    position: absolute;
+    top: 52%;
+    left: -5%;
+    width: 110%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--laser) 30%, var(--laser) 60%, transparent 100%);
+    opacity: 0.18;
+    transform: rotate(-4deg);
+  }
+
+  .laser-line::before {
+    content: '';
+    position: absolute;
+    top: -3px; left: 0; right: 0;
+    height: 7px;
+    background: linear-gradient(90deg, transparent 0%, var(--laser-glow) 30%, var(--laser-glow) 60%, transparent 100%);
+    filter: blur(4px);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 20%, transparent 100%);
+    opacity: 0.4;
+  }
+
+  .hero-content {
+    position: relative;
+    max-width: 820px;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--laser);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--laser);
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    margin-bottom: 1.2rem;
+  }
+
+  h1 em {
+    font-style: normal;
+    color: var(--laser);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 580px;
+    margin-bottom: 2rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    background: var(--laser);
+    color: var(--bg);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-ghost {
+    display: inline-block;
+    padding: 0.75rem 1.75rem;
+    border: 1px solid var(--border-mid);
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--text-muted);
+    color: var(--text);
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 1.2rem 2.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+  }
+
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 1.6rem;
+    color: var(--text);
+    display: block;
+    line-height: 1;
+  }
+  .stat-num span { color: var(--laser); }
+  .stat-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+    display: block;
+  }
+
+  /* MAIN TWO-COLUMN WORKSPACE BLOCK (Minimizes Scrolling) */
+  .workspace-layout {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2.5rem;
+    align-items: start;
+    background-image: url('images/Lithium-mot.png');
+    background-color: var(--bg2);
+    background-blend-mode: multiply;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 8px;
+  }
+
+  .section-eyebrow {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--laser);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.5rem;
+  }
+
+  /* COMPACT SERVICES STACK */
+  .services-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .service-card {
+    background: rgba(12, 18, 32, 0.7);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    position: relative;
+    backdrop-filter: blur(4px);
+    transition: background 0.2s;
+  }
+
+  .service-card:hover { background: var(--bg3); }
+
+  .service-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .service-icon { color: var(--laser); font-size: 1.2rem; }
+
+  .service-card h3 {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .service-card p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  .service-tags {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--laser);
+    background: var(--laser-dim);
+    border: 1px solid rgba(0,200,255,0.15);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+  }
+
+  .coming-soon-card { border: 1px dashed rgba(0,200,255,0.2); }
+  .cs-badge {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--accent);
+    background: var(--accent-dim);
+    padding: 0.1rem 0.4rem;
+    border-radius: 2px;
+    text-transform: uppercase;
+    float: right;
+  }
+
+  /* SPEC PANEL (MAPPED SIDE-BY-SIDE) */
+  .spec-panel {
+    background: rgba(12, 18, 32, 0.85);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    backdrop-filter: blur(4px);
+    position: sticky;
+    top: 100px;
+  }
+
+  .spec-panel .sp-title {
+    font-size: 0.65rem;
+    color: var(--laser);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .spec-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .spec-row:last-child { border-bottom: none; }
+  .spec-key { color: var(--text-muted); }
+  .spec-val { color: var(--accent); }
+
+  /* HORIZONTAL SECTORS ROW */
+  .sectors-bar {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1.2rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .sectors-track {
+    display: flex;
+    gap: 2rem;
+    padding: 0 2.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .sectors-track::-webkit-scrollbar { display: none; }
+
+  .sector-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .sector-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--laser); }
+
+  /* CONTACT & BRIEF STACKED ACCESSIBLY */
+  #contact {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 4rem 2.5rem;
+  }
+
+  #contact .inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-info-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .contact-detail {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 1.2rem;
+    border-radius: 4px;
+  }
+
+  .contact-detail strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-detail p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .form-group label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--bg2);
+    border: 1px solid var(--border-mid);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 3px;
+    outline: none;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--laser); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: var(--bg2);
+  }
+
+  .footer-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .footer-logo span { color: var(--laser); }
+  footer p { font-size: 0.75rem; color: var(--text-dim); }
+
+  @media (max-width: 900px) {
+    .workspace-layout { grid-template-columns: 1fr; gap: 2rem; }
+    #contact .inner { grid-template-columns: 1fr; gap: 2rem; }
+    .spec-panel { position: static; }
+    nav ul { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Sci<span>Tune</span></a>
+  <ul>
+    <li><a href="#services">Capabilities</a></li>
+    <li><a href="#sectors">Sectors</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg">
+    <div class="hero-grid"></div>
+    <div class="laser-line"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Engineering tuned by science</div>
+    <h1>Precision at the<br/>edge of <em>vacuum</em><br/>and quantum</h1>
+    <p class="hero-sub">
+      SciTune delivers expert consultancy across ultra-high vacuum systems, laser integration, and end-to-end quantum ecosystem engineering — serving demanding global research and industrial installations.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Start a project</a>
+      <a href="#services" class="btn-ghost">Explore capabilities</a>
+    </div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num">10<span>⁻¹¹</span></span>
+    <span class="stat-label">mbar design</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">360<span>°</span></span>
+    <span class="stat-label">UHV advisory</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">Quantum<span>.</span></span>
+    <span class="stat-label">Ecosystem ready</span>
+  </div>
+</div>
+
+<div class="workspace-layout" id="services">
+  <div>
+    <div class="section-eyebrow">Core Expertise</div>
+    <h2>Consultancy Fields</h2>
+    
+    <div class="services-stack">
+      <div class="service-card">
+        <div class="service-header">
+          <span class="service-icon">◎</span>
+          <h3>UHV Consultancy</h3>
+        </div>
+        <p>Chamber configuration, material metrics, bake-out processes, leak isolation planning, and targeted pressure scaling to 10⁻¹¹ mbar.</p>
+        <div class="service-tags">
+          <span class="tag">Design</span><span class="tag">RGA</span><span class="tag">Outgassing</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-header">
+          <span class="service-icon">⟶</span>
+          <h3>Laser Systems Advisory</h3>
+        </div>
+        <p>Integration strategies, wavelength evaluation, and configuration modeling for atom trapping and photonic arrays.</p>
+        <div class="service-tags">
+          <span class="tag">CW & Pulsed</span><span class="tag">Frequency Lock</span><span class="tag">Optics</span>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="service-header">
+          <span class="service-icon">◈</span>
+          <h3>Quantum Ecosystem Engineering</h3>
+        </div>
+        <p>Full-stack hardware alignment matching cryogenics, vacuum setups, precision lasers, and active instrumentation layers seamlessly.</p>
+        <div class="service-tags">
+          <span class="tag">Atom Traps</span><span class="tag">Metrology</span><span class="tag">Control Units</span>
+        </div>
+      </div>
+
+      <div class="service-card coming-soon-card">
+        <span class="cs-badge">In Development</span>
+        <div class="service-header">
+          <span class="service-icon" style="opacity:0.4;">⬡</span>
+          <h3 style="opacity:0.6;">UHV Hardware Assemblies</h3>
+        </div>
+        <p style="opacity:0.6;">Custom precision components, viewports, and custom flanges coming down the production line.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="spec-panel">
+    <div class="sp-title">// Functional Scope</div>
+    <div class="spec-row"><span class="spec-key">Pressure Spectrum</span><span class="spec-val">atm → 10⁻¹¹ mbar</span></div>
+    <div class="spec-row"><span class="spec-key">Pump Arrays</span><span class="spec-val">Ion / NEG / Turbo / Cryo</span></div>
+    <div class="spec-row"><span class="spec-key">Laser Bands</span><span class="spec-val">370 – 1560 nm</span></div>
+    <div class="spec-row"><span class="spec-key">Spectral Width</span><span class="spec-val">&lt; 100 kHz</span></div>
+    <div class="spec-row"><span class="spec-key">Trap Architecture</span><span class="spec-val">MOT / Paul / Penning</span></div>
+    <div class="spec-row"><span class="spec-key">Control Layers</span><span class="spec-val">ARTIQ / Sinara Systems</span></div>
+    <div class="spec-row"><span class="spec-key">Thermal Ranges</span><span class="spec-val">4 K – 300 K</span></div>
+    <div class="spec-row"><span class="spec-key">Operational Delivery</span><span class="spec-val">Remote + On-Site Systems</span></div>
+  </div>
+</div>
+
+<div class="sectors-bar" id="sectors">
+  <div class="sectors-track">
+    <div class="sector-item"><span class="sector-dot"></span>Quantum Computing</div>
+    <div class="sector-item"><span class="sector-dot"></span>Sensing & Metrology</div>
+    <div class="sector-item"><span class="sector-dot"></span>Cold Atom Research</div>
+    <div class="sector-item"><span class="sector-dot"></span>Photonics Arrays</div>
+    <div class="sector-item"><span class="sector-dot"></span>National Labs</div>
+    <div class="sector-item"><span class="sector-dot"></span>Semiconductor R&D</div>
+    <div class="sector-item"><span class="sector-dot"></span>Deep-Tech Industrial Systems</div>
+  </div>
+</div>
+
+<div id="contact">
+  <div class="inner">
+    <div>
+      <div class="section-eyebrow">Project Blueprint</div>
+      <h2>Scope Your Setup</h2>
+      <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.6; margin-bottom:2rem;">Let us know your core vacuum thresholds, required optical spectrum profiles, or timeline guidelines.</p>
+
+      <div class="contact-info-grid">
+        <div class="contact-detail">
+          <strong>SciTune Private Limited</strong>
+          <p>CIN: U72100KA2026PTC222225<br/>Incorporated: Karnataka, India</p>
+        </div>
+        <div class="contact-detail">
+          <strong>Registered Hub Address</strong>
+          <p>15, Annabella Manor-2, Bijai-KMC Road,<br/>Mangalore, Dakshina Kannada – 575004</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <form class="contact-form" onsubmit="return false;">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">First Name</label>
+            <input type="text" id="fname" placeholder="Leon"/>
+          </div>
+          <div class="form-group">
+            <label for="lname">Last Name</label>
+            <input type="text" id="lname" placeholder="Scott"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Corporate Email Address</label>
+          <input type="email" id="email" placeholder="leon@company_name.com"/>
+        </div>
+        <div class="form-group">
+          <label for="service">Core Service Area Required</label>
+          <select id="service">
+            <option value="">Select Domain...</option>
+            <option>UHV Consultancy</option>
+            <option>Laser Systems Advisory</option>
+            <option>Quantum Ecosystem Engineering</option>
+            <option>Multiple Profiles / Systems</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="msg">Project Specifications & Overview</label>
+          <textarea id="msg" placeholder="Outline vacuum targets, beam layouts, or target parameters..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:fit-content;">Submit Specifications</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="#" class="footer-logo">Sci<span>Tune</span></a>
+  <p>© 2026 SciTune Private Limited · CIN U72100KA2026PTC222225</p>
+</footer>
+
+</body>
+</html>
